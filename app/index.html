@@ -1,0 +1,72 @@
+<html lang="en">
+<style>
+    #container {
+        display: none;
+    }
+    #container-edit {
+        display: none;
+    }
+    #container-edit input {
+        width: 195px;
+        font-size: 15px;
+    }
+    .container {
+        margin: 45px auto;
+        width: 90%;
+    }
+    h3 {
+        display: inline-block;
+    }
+</style>
+<script>
+    (async function init() {
+        const response = await fetch('http://localhost:3000/get-profile');
+        console.log("response", response);
+        const user = await response.json();
+
+        document.getElementById('name').textContent = user.name ? user.name : 'Jane Doe';
+        document.getElementById('grade').textContent = user.grade ? user.grade : 'B-';
+
+        const cont = document.getElementById('container');
+        cont.style.display = 'block';
+    })();
+
+    async function save() {
+        const contEdit = document.getElementById('container-edit');
+        const cont = document.getElementById('container');
+
+        cont.style.display = 'block';
+        contEdit.style.display = 'none';
+    }
+
+    function edit() {
+        const contEdit = document.getElementById('container-edit');
+        const cont = document.getElementById('container');
+
+        document.getElementById('input-name').value = document.getElementById('name').textContent;
+        document.getElementById('input-grade').value = document.getElementById('grade').textContent;
+
+        cont.style.display = 'none';
+        contEdit.style.display = 'block';
+    }
+
+</script>
+<body>
+    <div class='container' id='container'>
+        <h1>Student profile</h1>
+        <span>Name: </span><h3 id='name'>Anna Smith</h3>
+        <hr />
+        <span>Grade: </span><h3 id='grade'>coding</h3>
+        <hr />
+        <button class='button' onclick="edit()">Edit</button>
+    </div>
+    <div class='container' id='container-edit'>
+        <h1>Student profile</h1>
+        <span>Name: </span><label for='input-name'></label><input type="text" id='input-name' value='Anna Smith' />
+        <hr />
+        <span>Grade: </span><label for='input-grade'></label><input type="text" id='input-grade' value='coding' />
+        <hr />
+        <button class='button' onclick="save()">Save</button>
+    </div>
+</body>
+</html>
