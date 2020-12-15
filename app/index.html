@@ -20,7 +20,7 @@
 </style>
 <script>
     (async function init() {
-        const response = await fetch('http://localhost:3000/get-profile');
+        const response = await fetch('http://localhost:3000/get');
         console.log("response", response);
         const user = await response.json();
 
@@ -34,6 +34,24 @@
     async function save() {
         const contEdit = document.getElementById('container-edit');
         const cont = document.getElementById('container');
+
+        const payload = {
+            name: document.getElementById('input-name').value, 
+            grade: document.getElementById('input-grade').value
+        };
+        
+        const response = await fetch('http://localhost:3000/update', {
+            method: "POST",
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
+        const jsonResponse = await response.json();
+
+        document.getElementById('name').textContent = jsonResponse.name;
+        document.getElementById('grade').textContent = jsonResponse.grade;
 
         cont.style.display = 'block';
         contEdit.style.display = 'none';
