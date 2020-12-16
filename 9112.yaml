@@ -1,7 +1,7 @@
 version: '3'
 services:
   mad9112: 
-    image: mad9112:1.0
+    image: professorcezar/mad9112:1.0
     ports:
       - 3000:3000
   mongodb:
