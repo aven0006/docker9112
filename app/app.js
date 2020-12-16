@@ -15,7 +15,7 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
-let mongoUrlLocal = "mongodb://admin:123456@localhost:27017";
+let mongoUrlLocal = "mongodb://admin:123456@mongodb:27017";
 let databaseName = "students";
 let collectionName = "grades";
 
